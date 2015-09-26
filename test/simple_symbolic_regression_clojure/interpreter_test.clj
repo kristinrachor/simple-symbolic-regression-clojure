@@ -2,9 +2,6 @@
   (:use midje.sweet)
   (:use [simple-symbolic-regression-clojure.interpreter])
   )
-(fact "gets a vector containing two arguments, returns a vector with same elements reversed")
-      (swap 5 8) => [8 5])
-
 
 (fact "it gets a empty program and an empty binding it returns nil with an empty stack"
       (interpret [] {}) => {:result nil, :stack []})
@@ -84,6 +81,19 @@
                => [2469133333333333308642N]
              )
        )
+
+
+(fact "swap gets a vector containing two arguments, returns a vector with same elements reversed"
+      (swap 5 8) => [8 5])
+
+(facts "about process-token with :swap"
+       (fact "process-token with :swap and an empty stack"
+             (process-token [] :swap) => [])
+       (fact "process-token with :swap and only one number"
+             (process-token [7] :swap) => [7])
+       (fact "process-token with :swap and two numbers"
+             (process-token [3 5] :swap) => [5 3]))
+
 
 (facts "about process-token with a variable"
        (fact "process-token with an undefined variable"
