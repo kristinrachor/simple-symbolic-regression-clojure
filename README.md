@@ -6,7 +6,7 @@ The current system frankly isn't a terribly effective GP system and doesn't use 
 
 ## How to use it
 
-If you have [Leiningen installed](http://leiningen.org/) and clone this repo you should be able to run the system using `lein run` or `time lein run` if you want to collect timing data from your run.
+If you have [Leiningen installed](http://leiningen.org/) and clone this repo you should be able to run the system using `lein run` or `time lein run` if you want to collect timing data from your run. (Note that you will need [an installed Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) as well.)
 
 
 ## How to implement your own test problem
