@@ -2,6 +2,9 @@
   (:use midje.sweet)
   (:use [simple-symbolic-regression-clojure.interpreter])
   )
+(fact "gets a vector containing two arguments, returns a vector with same elements reversed")
+      (swap 5 8) => [8 5])
+
 
 (fact "it gets a empty program and an empty binding it returns nil with an empty stack"
       (interpret [] {}) => {:result nil, :stack []})
@@ -194,4 +197,3 @@
                             (->Rubric {:x -1, :y 7} -1) (->Rubric {:x 3, :y -2} 4)]]
                (total-score-on script rubrics) => (+ 0 2 6 10)))
        )
-

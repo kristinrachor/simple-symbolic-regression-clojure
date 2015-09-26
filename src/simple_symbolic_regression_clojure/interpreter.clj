@@ -4,6 +4,11 @@
 
 ;;; Interpreter
 
+(defn swap
+  [x y]
+  [y x])
+
+
 (defn translate-op [op]
   "Translate operators from the symbolic regression language to
    the appropriate Clojure operator for evaluation. A key goal
@@ -14,6 +19,7 @@
     :- -'
     :* *'
     :÷ /
+    :swap swap
     op))
 
 (defn legal-division-stack? [stack]
@@ -30,12 +36,19 @@
     (let [arg2 (peek stack)
           arg1 (peek (pop stack))
           new-stack (pop (pop stack))]
-      (conj new-stack
+      (add-values-to-stack new-stack
             ((translate-op op) arg1 arg2)))
     stack))
 
+(defn add-values-to-stack
+  [stack values]
+  (if (seq? values)
+    (concat values stack)
+    (conj stack values)
+  ))
+
 (defn binary-operator? [token]
-  (contains? #{:+ :- :* :÷} token))
+  (contains? #{:+ :- :* :÷ :swap} token))
 
 ; We might consider throwing an exception in the :else
 ; case instead of returning to help alert (human) programmers
