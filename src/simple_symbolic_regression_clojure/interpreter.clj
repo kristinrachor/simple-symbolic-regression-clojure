@@ -30,6 +30,13 @@
        (or (not (= op :÷))
            (legal-division-stack? stack))))
 
+(defn add-values-to-stack
+  [stack values]
+  (if (sequential? values)
+    (vec (concat values stack))
+    (conj stack values)
+    ))
+
 (defn process-binary-operator [op stack]
   "Apply a binary operator to the given stack, returning the updated stack"
   (if (legal-binary-op-stack? op stack)
@@ -39,13 +46,6 @@
       (add-values-to-stack new-stack
             ((translate-op op) arg1 arg2)))
     stack))
-
-(defn add-values-to-stack
-  [stack values]
-  (if (seq? values)
-    (concat values stack)
-    (conj stack values)
-  ))
 
 (defn binary-operator? [token]
   (contains? #{:+ :- :* :÷ :swap} token))
